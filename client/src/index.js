@@ -9,7 +9,7 @@ import reportWebVitals from './reportWebVitals';
 import Edit from './Edit';
 import CreateUser from './CreateUser';
 import { LoginPage } from './pages/LoginPage';
-import MainMenuPage from './pages/MainMenuPage';
+import SignUpPage from './pages/SignupPage';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -22,8 +22,7 @@ root.render(
           <Route path='/edit/:id' element={<Edit />}></Route>
           <Route path='/create_user' element={<CreateUser />}></Route>
           <Route path='/login_page' element={<LoginPage />}></Route>
-          {/* test aja biar ngedit app component */}
-          {/* <Route path='main_menu' element={<MainMenuPage />}></Route> */}
+          <Route path='/signup' element={<SignUpPage />}></Route>
         </Routes>
       </Provider>
     </BrowserRouter>

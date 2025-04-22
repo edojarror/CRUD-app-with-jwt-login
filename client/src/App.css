@@ -44,3 +44,11 @@ button:hover{
 p {
   margin: auto 2px;
 }
+
+.errortext::before {
+  display: inline;
+  content: "⚠ ";
+}
+.errortext {
+  color: red;
+}

@@ -8,7 +8,7 @@ import { readHandler, deleteHandler } from './ButtonHandler'
 
 function App() {
   const [data, setData] = useState([]);
-  let navigate = useNavigate();
+  const navigate = useNavigate();
 
   const buttonStyles = {
     fontSize: "20px",
@@ -22,9 +22,6 @@ function App() {
   store.subscribe(() => console.log("redux store : ",store.getState()));
 
   useEffect(() => {
-
-     // check localstorage when running
-     console.log("dont have token ? ", !localStorage.getItem("token") || localStorage.getItem("token") === null)
 
      // condition a)
 
@@ -42,9 +39,12 @@ function App() {
          })
          .then(res => {
              console.log(res);
+            //  condition b
              if(res.status === 401) {
                  console.log("access denied");
                  navigate('/login_page')
+
+              //  condition c
              } else if (res.ok) {
                  console.log("access to main menu page granted");
                  readHandler(setData)  
@@ -55,11 +55,7 @@ function App() {
              console.log(err);
          })
      }
-
-    // console.log("use effect running, data")
-    //   readHandler(setData)  
-    // console.log("after effect ...")
-  }, [])
+  },[])
 
   return (
     <div className="App">

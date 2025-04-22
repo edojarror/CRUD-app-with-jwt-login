@@ -81,23 +81,28 @@ const createToken = (userdata) => {
     return sign(payload, secretkey)
 }
 
-// const verifyToken = (jwt) => {
-//     console.log("verify handler token = ", jwt);
-//     let token = Object.values(jwt).toString()
-//     console.log("token = ", token)
-//     try {
-//         return verify(token, secretkey)
-//     } catch (err) {
-//         console.log(err);
-//     }
-// }
+// verify user credential when login
 
 const verifyUsernamePassword = async (username, password) => {
+    console.log("crosscheck user data with data on database");
     try {
         const [result, field] = await connection.query(`SELECT * FROM userdata WHERE EXISTS (SELECT username, password WHERE username= "${username}" AND password= "${password}")`);
        return result[0] || result.length > 0 ? true : false
     } catch (error) {
         console.log(error)
+    }
+}
+
+// check if username already exist on server
+const isUsernameExisted = async (username) => {
+    console.log("check if username already exist")
+    try {
+        const [result, field] = await connection.query(`SELECT * FROM userdata WHERE EXISTS (SELECT username WHERE username= "${username}")`);
+        console.log("check username existance = ", result, "result length = ", result.length)
+        // if array empty then return false (user not exist), while array not empty then user was existed
+        return result[0] || result.length > 0 ? true : false
+    } catch (error) {
+        console.log("error : ", error)
     }
 }
 
@@ -168,8 +173,32 @@ app.post('/verify', async (req, res) => {
             res.status(401).send(err)
         }
     }
-    // console.log(verifyToken(req.body));
-    // res.send(verifyToken(req.body))
+    
+})
+
+// signup
+app.post('/signup', async (req, res) => {
+    // check if username already existed on database (using client user data)
+    // if true then return error to client-side with string (username already existed)
+    // if false then do html post at database, post client user data (username, password) into database  
+    
+    try {
+
+        if(await isUsernameExisted(req.body.username)) {
+            console.log("username already existed at database")
+            res.status(401).send("username existed") 
+        } else {
+            await postFunction(req.body.username, req.body.password);
+            console.log("username succesfully created")
+            res.status(201).send("signup successful")
+        }
+        console.log(req.body);
+        console.log("client try to signup a userdata");
+
+    } catch (err) {
+        console.log(err)
+    }
+    
 })
 
 app.listen(port, () => console.log("app running at port 4000", ))
