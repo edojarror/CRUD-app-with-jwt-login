@@ -107,10 +107,12 @@ const MobileMode = ({handleLogout, navigate}) => {
         position: "relative",
     }
     const navbarContainerStyles = {
+        boxSizing: "border-box",
         display: "flex",
         width: "100%",
         border: "2px double blue",
         background: "linear-gradient(to right, #fdfdfd 0%, #fdfdfd 100%)",
+        // padding: "4px 2px",
     }
     const buttonStyles = {
         background: "linear-gradient(to right, #ffffff 0%, #ffffff 100%)",
@@ -133,7 +135,7 @@ const MobileMode = ({handleLogout, navigate}) => {
         justifyContent: "flex-end",
         alignItems: "center",
         paddingBottom: "4px",
-        marginRight: "14px"
+        marginRight: "4px"
     }
 
     return (
@@ -144,10 +146,10 @@ const MobileMode = ({handleLogout, navigate}) => {
                 </button>   
             <div style={mobileLogoStyles}>
                 <div>
-                    <img src="/img/jarror-logo.png" alt="jarror_logo" height="60px"  />    
+                    <img src="/img/jarror-logo.png" alt="jarror_logo"  />    
                 </div>
                 <div style={{}}>
-                    <p style={{fontSize: "22px", fontWeight: 700, margin: "0", paddingBottom: "8px"}}>Jarror's</p>    
+                    <p style={{fontSize: "22px", fontWeight: 700, margin: "0", paddingBottom: "4px"}}>Jarror's</p>    
                 </div>
                 
             </div>

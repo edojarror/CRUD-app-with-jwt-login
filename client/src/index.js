@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter, Route, Routes } from 'react-router';
-// import { Provider } from 'react-redux';
+import { Provider } from 'react-redux';
 import { store } from './store';
-import { ChakraProvider } from "@chakra-ui/react";
+// import { ChakraProvider } from '@chakra-ui/react';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
@@ -12,31 +12,21 @@ import CreateUser from './CreateUser';
 import { LoginPage } from './pages/LoginPage';
 import SignUpPage from './pages/SignupPage';
 
-const theme = {
-  // ... your system-ui theme
-  config: {
-    useSystemColorMode: false, // or true
-    initialColorMode: "light", // or "dark"
-    cssVarPrefix: "chakra", // any string
-  }
-}
-
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     
     <BrowserRouter>
-      {/* <Provider store={store}> */}
-        {/* <ChakraProvider theme={theme}> */}
-          <Routes>
+      <Provider store={store}>
+       
+        <Routes>
             <Route path='/' element={<App />}></Route> 
             <Route path='/edit/:id' element={<Edit />}></Route>
             <Route path='/create_user' element={<CreateUser />}></Route>
             <Route path='/login_page' element={<LoginPage />}></Route>
             <Route path='/signup' element={<SignUpPage />}></Route>
-          </Routes>   
-        {/* </ChakraProvider> */}
-      {/* </Provider> */}
+          </Routes> 
+      </Provider>
     </BrowserRouter>
   </React.StrictMode>
 );
