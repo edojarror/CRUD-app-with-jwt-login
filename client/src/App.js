@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router';
 import { currentUserData, store } from './store';
-import Navbar  from './components/Navbar';
+import Navbar from './components/Navbar';
 import './App.css';
 
 import { readHandler, deleteHandler } from './ButtonHandler'
@@ -18,17 +18,6 @@ function App() {
     borderRadius: "8px",
     backgroundColor: "black",
     color: "white" 
-  }
-
-  const browseButtonStyles = {
-    fontSize: "18px", 
-    width: "80%", 
-    padding: "12px", 
-    borderRadius: "16px", 
-    border: "none", 
-    backgroundColor: "black", 
-    color: "white"
-
   }
 
   store.subscribe(() => console.log("redux store : ",store.getState()));
@@ -71,17 +60,8 @@ function App() {
 
   return (
     <div className="App">
-      <Navbar></Navbar>
-      <div style={{height: "500px", width: "100%", border: "2px solid blue"}}>
-        <div className='title' style={{marginTop: "70px", padding: "0 30px"}}>
-          <p style={{fontSize: "32px"}}>Create, collaborate, and scale your blogs and docs.</p>
-        </div>
-        <div className='subtitle'  style={{padding: "0 12px", marginBottom: "40px"}}>
-          <p>Effortlessly build blogs, API docs, and product guides with Hashnode, with the flexibility of a headless CMS and more.</p>
-        </div>
-        <div className='browse-button'>
-          <button style={browseButtonStyles}>Browse</button>
-        </div>
+      <div style={{height: "500px", width: "100%", border: "2px solid blue", boxSizing: "border-box"}}>
+        <Navbar />
         <ul>
         {
             data.map(item => { 
@@ -115,9 +95,6 @@ function App() {
         }   
         </ul>
           
-          <a >
-          <i class="fa fa-bars"></i>
-          </a>
       </div>
       <div style={{boxSizing: "border-box",display: "flex", justifyContent: "center", alignItems: "center", marginTop: "8px"}}>
         <Link to={"/create_user"}>

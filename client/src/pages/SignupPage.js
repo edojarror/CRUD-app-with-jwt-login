@@ -3,11 +3,9 @@ import { SignupHandler, RedirectingToPage } from '../ButtonHandler';
 import { useNavigate } from 'react-router';
 import { useForm } from 'react-hook-form';
 import { ErrorMessage } from '@hookform/error-message';
-import { EyeIcon, EyeSlashIcon } from '@heroicons/react/24/outline';
 import '../App.css'
 export default function SignUpPage () {
     const [inputValue, setInputValue] = useState({username: "", password: ""});
-    const [isPasswordShown, setIsPasswordShown] = useState(false);
     const navigate = useNavigate();
     const { handleSubmit, register, watch, formState: {errors} } = useForm({ criteriaMode: "all"});
     const onSubmit = (data) => {
@@ -18,8 +16,8 @@ export default function SignUpPage () {
     return (
         <div>Sign Up Page
             <form onSubmit={handleSubmit(onSubmit)}>
-                <div className='inputContainer'>
-                    <label style={{width: "80px"}}>Username : </label>
+                <div>
+                    <label>Username : </label>
                     <input 
                         value={inputValue.username} 
                         {
@@ -40,8 +38,8 @@ export default function SignUpPage () {
                         .map(([type, message]) => (<p className='errortext' key={type}>{message}</p>))
                     
                     } />
-                <div className='inputContainer'>
-                    <label style={{width: "80px"}}>Password : </label>
+                <div>
+                    <label>Password : </label>
                     <input 
                         value={inputValue.password} 
                         {
@@ -53,14 +51,7 @@ export default function SignUpPage () {
                                 })
                         }
                         onChange={(e) => setInputValue({...inputValue, password: e.target.value})}
-                        type={isPasswordShown ? "text" : "password"}
-                        autoComplete='off'
                         />
-                        <div style={{display: "flex", marginLeft: "8px"}} onClick={() => setIsPasswordShown(!isPasswordShown)}>
-                        {
-                                isPasswordShown ? <EyeIcon height="16px" /> : <EyeSlashIcon height="16px" />                       
-                        }
-                        </div>
                 </div>
                 <ErrorMessage
                     errors={errors}
@@ -69,9 +60,10 @@ export default function SignUpPage () {
                         .map(([type, message]) => <p key={type} className='errortext'>{message}</p>)
                     }
                 />
-
                 <div>
+                    {/* <button type='submit' onClick={() => SignupHandler(inputValue, navigate)}>Signup</button> */}
                     <input type='submit' />
+                    
                 </div>    
             </form>
             

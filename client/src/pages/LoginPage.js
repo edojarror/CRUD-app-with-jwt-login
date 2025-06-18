@@ -1,13 +1,9 @@
-import { useState } from 'react';
 import { useNavigate } from "react-router";
 import { useForm } from 'react-hook-form';
 import { ErrorMessage } from '@hookform/error-message';
 import { loginHandler, RedirectingToPage } from "../ButtonHandler";
-import { EyeSlashIcon, EyeIcon } from '@heroicons/react/24/outline';
-import '../App.css';
 
 export function LoginPage () {
-    const [isPasswordShown, setIsPasswordShown] = useState(false);
 
     let navigate = useNavigate();
     const { handleSubmit, register, formState: {errors}} = useForm({criteriaMode: "all"})
@@ -20,8 +16,8 @@ export function LoginPage () {
         <div>
            <div>Login Page</div>
            <form onSubmit={handleSubmit(onSubmit)}>
-                <div className='inputContainer'>
-                    <label style={{width: "80px"}}>Username</label>
+                <div>
+                    <label>Username</label>
                     <input 
                         defaultValue=""
                         {
@@ -33,7 +29,6 @@ export function LoginPage () {
                                 }
                             )
                         } 
-                        autoComplete="on"
                     />       
                 </div>
 
@@ -44,8 +39,8 @@ export function LoginPage () {
                         .map(([type, message]) => <p key={type} className='errortext'>{message}</p>)}
                  />
 
-                <div className='inputContainer'>
-                    <label style={{width: "80px"}}>Password</label>
+                <div>
+                    <label>Password</label>
                     <input 
                         defaultValue="" 
                         {
@@ -55,20 +50,7 @@ export function LoginPage () {
                                     minLength: {value: 6, message: "enter at least 6 characters"},
                                     pattern: {value: /^[a-zA-Z0-9]*$/, message: "only accept alphanumeric"}
                                 })
-                        }
-                        autoComplete="off"
-                        type={isPasswordShown ? "text" : "password"}
-                    />
-                    <div style={{ display: "flex", marginLeft: "8px"}} onClick={() => {
-                        setIsPasswordShown(!isPasswordShown);
-                    }}>
-
-                         {
-                            isPasswordShown ? <EyeIcon height="16px" /> : <EyeSlashIcon height="16px" /> 
-                         }
-
-                    </div>
-                    
+                        } />
                 </div>
                 <ErrorMessage 
                     name="password" 
