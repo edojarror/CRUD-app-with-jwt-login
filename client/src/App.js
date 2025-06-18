@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router';
 import { currentUserData, store } from './store';
+import Navbar from './components/Navbar';
 import './App.css';
 
 import { readHandler, deleteHandler } from './ButtonHandler'
@@ -59,8 +60,8 @@ function App() {
 
   return (
     <div className="App">
-      <div style={{height: "500px", width: "100%", border: "2px solid blue"}}>
-        display text here : 
+      <div style={{height: "500px", width: "100%", border: "2px solid blue", boxSizing: "border-box"}}>
+        <Navbar />
         <ul>
         {
             data.map(item => { 
